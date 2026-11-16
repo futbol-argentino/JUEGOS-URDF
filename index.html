@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Un rato de fútbol · El duelo</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--noche:#060b1c;--azul:#0e1a3f;--azul2:#16265a;--cel:#75aadb;--sol:#f6b40e;--ink:#f3f6ff;--mute:#8d9bc2;--line:#25346b;--ok:#2ed47a;--bad:#ff5468;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{min-height:100vh;color:var(--ink);font:400 16px/1.4 Inter,system-ui,sans-serif;overflow-x:hidden;
+background:radial-gradient(900px 520px at 50% -10%,#24408f66,transparent 70%),radial-gradient(600px 420px at 0 100%,#75aadb26,transparent 70%),var(--noche)}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,#75aadb14 0 64px,transparent 64px 128px);-webkit-mask:linear-gradient(90deg,#000,transparent 24%,transparent 76%,#000);mask:linear-gradient(90deg,#000,transparent 24%,transparent 76%,#000)}
+.big{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;letter-spacing:.02em}
+.top{position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px;padding:14px 22px;max-width:1500px;margin:auto}
+.brand{display:flex;align-items:center;gap:12px;font-size:34px;line-height:.95}
+.sun{width:38px;height:38px;border-radius:50%;background:radial-gradient(circle,var(--sol) 0 38%,transparent 40%),conic-gradient(from 0deg,var(--sol) 0 6%,transparent 6% 12.5%,var(--sol) 12.5% 18.5%,transparent 18.5% 25%,var(--sol) 25% 31%,transparent 31% 37.5%,var(--sol) 37.5% 43.5%,transparent 43.5% 50%,var(--sol) 50% 56%,transparent 56% 62.5%,var(--sol) 62.5% 68.5%,transparent 68.5% 75%,var(--sol) 75% 81%,transparent 81% 87.5%,var(--sol) 87.5% 93.5%,transparent 93.5%);flex:none}
+.brand em{font-style:normal;color:var(--cel)}
+.round{text-align:center}
+.round b{font-size:26px}
+.ticks{display:flex;gap:3px;margin-top:4px}
+.ticks i{width:14px;height:5px;border-radius:2px;background:var(--line)}
+.ticks i.d{background:var(--cel)}.ticks i.c{background:var(--sol)}
+.ctl{display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap}
+.ctl button{font:600 13px Inter;padding:8px 12px;border-radius:9px;background:#ffffff10;color:var(--ink);border:1px solid var(--line);cursor:pointer}
+.ctl button:hover{background:#ffffff1c}
+main{position:relative;display:grid;grid-template-columns:minmax(260px,1fr) minmax(0,1.9fr) minmax(260px,1fr);grid-template-areas:"a c b";gap:20px;max-width:1500px;margin:auto;padding:8px 22px 40px;align-items:start}
+#p0{grid-area:a}#p1{grid-area:b}#center{grid-area:c}
+.pl{position:relative;background:linear-gradient(180deg,var(--azul2),var(--azul));border:1px solid var(--line);border-radius:20px;padding:24px 18px 20px;text-align:center;overflow:hidden;transition:box-shadow .3s}
+.pl::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:var(--c)}
+.pl.on{box-shadow:0 0 0 2px var(--c),0 0 56px -10px var(--c)}
+.tag{height:22px;color:var(--c);font:800 12px/22px Inter;letter-spacing:.14em;visibility:hidden}
+.on .tag{visibility:visible;animation:pul 1.4s infinite}
+@keyframes pul{50%{opacity:.35}}
+.ph{display:grid;place-items:center;position:relative;width:min(180px,70%);aspect-ratio:4/5;margin:0 auto 12px;overflow:hidden;cursor:pointer;background:linear-gradient(160deg,var(--c),#0a1230);clip-path:polygon(0 0,100% 0,100% 90%,90% 100%,0 100%)}
+.ph b{font:400 96px/1 "Bebas Neue";color:#0a1230a0}
+.ph img,.crest img{position:absolute;inset:0;width:100%;height:100%}
+.ph img{object-fit:cover}
+.pname{font-size:48px;line-height:1}
+.score{font-size:140px;line-height:.95;color:var(--sol);font-variant-numeric:tabular-nums;margin-top:6px}
+.lbl{color:var(--mute);font-size:13px}
+.st{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.st div{background:#0004;border-radius:10px;padding:8px;font-size:13px;color:var(--mute)}
+.st b{display:block;color:var(--ink);font:400 26px/1 "Bebas Neue"}
+.trk{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin-top:14px}
+.sg{height:28px;border-radius:6px;border:2px solid var(--lc);background:#0003;font:800 11px/24px Inter;color:var(--lc)}
+.sg.cur{animation:pul 1.2s infinite;background:#ffffff18}
+.sg.hit{background:var(--ok);border-color:var(--ok);color:#06210f}.sg.part{background:var(--sol);border-color:var(--sol);color:#2b1d00}.sg.miss{background:var(--bad);border-color:var(--bad);color:#fff}
+.facil{--lc:#75aadb;--lt:#07102a}.medio{--lc:#a68bff;--lt:#07102a}.dificil{--lc:#ff8a3d;--lt:#07102a}.imposible{--lc:#e5384f;--lt:#fff}
+.stage{background:linear-gradient(180deg,var(--azul2),var(--azul));border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.stage.imposible{box-shadow:0 0 0 2px var(--lc),0 0 60px -8px var(--lc)}
+.lvl{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 20px;background:var(--lc);color:var(--lt);font-size:32px;line-height:1}
+.lvl small{font:800 13px Inter;letter-spacing:.06em}
+.steps{display:flex;gap:6px;padding:14px 20px 0}
+.steps span{flex:1;font:600 13px Inter;color:var(--mute);border-top:3px solid var(--line);padding-top:6px}
+.steps .on{color:var(--ink);border-color:var(--sol)}
+.body{padding:12px 20px 24px;text-align:center}
+.comp{color:var(--mute);margin-bottom:14px}
+.board{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;background:#0005;border-radius:16px;padding:22px 10px}
+.side{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0}
+.crest{position:relative;display:grid;place-items:center;width:clamp(84px,13vw,140px);aspect-ratio:1;border-radius:50%;overflow:hidden;cursor:pointer}
+.crest b{width:100%;height:100%;display:grid;place-items:center;font:400 44px "Bebas Neue";color:#fff}
+.crest img{object-fit:contain;background:transparent}
+.ph:focus-within,.crest:focus-within{outline:3px solid var(--sol)}
+input[type=file]{position:absolute;opacity:0;width:1px;height:1px}
+.tname{font:400 clamp(22px,3vw,34px)/1 "Bebas Neue";overflow-wrap:anywhere}
+.mid{display:flex;align-items:center;gap:8px}
+.mid>i{font:400 56px "Bebas Neue";color:var(--mute);font-style:normal}
+.gl{display:flex;flex-direction:column;gap:6px;align-items:center}
+.gl input{width:clamp(70px,10vw,110px);height:clamp(84px,12vw,124px);text-align:center;font:400 clamp(60px,9vw,96px)/1 "Bebas Neue";color:var(--ink);background:var(--noche);border:3px solid var(--line);border-radius:14px;-moz-appearance:textfield}
+.gl input::-webkit-inner-spin-button{-webkit-appearance:none}
+.gl input:focus{outline:none;border-color:var(--sol)}
+.gl input:disabled{opacity:.85}
+.gl button{width:44px;height:30px;font-size:20px;padding:0;background:#ffffff12;color:var(--ink);border:1px solid var(--line);border-radius:8px;cursor:pointer}
+.gl button:disabled{visibility:hidden}
+.real{margin-top:18px;animation:pop .6s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{transform:scale(.6);opacity:0}}
+.real small{display:block;color:var(--mute);font:600 13px Inter}
+.real b{font:400 88px/1 "Bebas Neue"}
+.pill{display:inline-block;margin-top:6px;padding:6px 16px;border-radius:99px;font-weight:800}
+.pill.ok{background:#2ed47a26;color:var(--ok)}.pill.no{background:#ff546826;color:var(--bad)}.pill.na{background:#ffffff14;color:var(--mute)}
+.scorers{margin-top:18px;text-align:left}
+.scorers label{font-weight:600;display:block;margin-bottom:6px}
+textarea{width:100%;min-height:84px;border-radius:12px;border:2px solid var(--line);background:var(--noche);color:var(--ink);font:inherit;padding:12px}
+textarea:focus{outline:none;border-color:var(--sol)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;text-align:left}
+.cols div{background:#0005;border-radius:12px;padding:12px}
+.cols h4{margin:0 0 4px;font:400 22px "Bebas Neue"}
+.cols p{margin:0;white-space:pre-line}
+.said{margin:12px 0 0;color:var(--mute)}.said b{color:var(--ink)}
+.row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.row button{font:800 18px Inter;border:0;border-radius:12px;padding:14px 26px;cursor:pointer;background:var(--sol);color:#1d1400}
+.row .ok{background:var(--ok);color:#06210f}.row .no{background:var(--bad);color:#fff}.row .gh{background:#ffffff14;color:var(--ink)}
+button:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.msg{min-height:22px;color:var(--bad);font-weight:600;margin-top:10px}
+.end{padding:36px 20px;text-align:center}
+.end .ph{width:200px;cursor:default}
+.end h2{font-size:84px;line-height:1;margin:10px 0 4px}
+.fly{position:fixed;left:0;top:0;margin:-34px 0 0 -44px;font:400 72px "Bebas Neue";color:var(--sol);z-index:50;pointer-events:none;text-shadow:0 0 24px #f6b40e}
+.cf{position:fixed;left:0;top:0;width:9px;height:14px;z-index:49;pointer-events:none}
+.ov{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:18px;background:#030614dd;backdrop-filter:blur(6px)}
+.ov[hidden]{display:none}
+.mod{width:min(580px,100%);max-height:100%;overflow:auto;background:linear-gradient(180deg,var(--azul2),var(--azul));border:1px solid var(--line);border-top:6px solid var(--sol);border-radius:20px;padding:26px}
+.mod h2{font-size:52px;line-height:1;margin:0 0 6px}
+.mod p{margin:0;color:var(--mute)}
+.mod table{width:100%;border-collapse:collapse;margin:16px 0 10px}
+.mod th{font:600 12px Inter;color:var(--mute);padding:4px}
+.mod td{padding:8px 6px;border-top:1px solid var(--line);text-align:center;font:400 28px "Bebas Neue"}
+.mod td:first-child{text-align:left;font-size:24px;color:var(--lc)}
+.mod td:last-child{color:var(--sol)}
+.mod ul{padding-left:18px;margin:0;color:var(--mute)}.mod li{margin:6px 0}.mod li b{color:var(--ink)}
+.gb{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px;text-align:left}
+.gb>div{background:#0005;border-radius:12px;padding:10px 12px}
+.gb h4{margin:0 0 4px;font:400 26px "Bebas Neue"}
+.slot{display:flex;align-items:center;gap:8px;min-height:40px;padding:6px 10px;margin-top:6px;border-radius:9px;border:2px dashed var(--line);color:var(--mute)}
+.slot b{font-weight:800}
+.slot.f{border:2px solid var(--ok);background:#2ed47a1f;color:var(--ink)}
+.slot.m{border:2px solid var(--bad);background:#ff54681a;color:var(--ink)}
+.slot.z{border-style:solid;justify-content:center}
+.slot.n{animation:pop .5s cubic-bezier(.2,1.4,.4,1)}
+.gin{display:flex;gap:8px;margin-top:18px}
+.gin input{flex:1;min-width:0;height:56px;padding:0 14px;font:600 18px Inter;color:var(--ink);background:var(--noche);border:2px solid var(--line);border-radius:12px}
+.gin input:focus{outline:none;border-color:var(--sol)}
+.gin button{padding:0 24px;font:800 17px Inter;border:0;border-radius:12px;background:var(--sol);color:#1d1400;cursor:pointer}
+.errs{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px;color:var(--mute);font-size:14px}
+.errs>span:first-of-type{display:flex;gap:5px}
+.errs i{width:14px;height:14px;border-radius:50%;border:2px solid var(--bad)}.errs i.x{background:var(--bad)}
+.chip{padding:3px 10px;border-radius:99px;background:#ff54681f;color:var(--bad);font-weight:600;text-decoration:line-through}
+@media (max-width:980px){
+.top{grid-template-columns:1fr;text-align:center}.brand,.ctl{justify-content:center}.ticks{justify-content:center}
+main{grid-template-columns:1fr 1fr;grid-template-areas:"a b" "c c";padding:8px 12px 32px;gap:12px}
+.score{font-size:84px}.pname{font-size:34px}.ph{width:96px}.ph b{font-size:48px}.pl{padding:18px 10px 14px}
+.trk{gap:2px}.sg{height:22px;font-size:9px;line-height:18px}.st{grid-template-columns:1fr}
+.real b{font-size:64px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+ <div class="brand big"><span class="sun"></span><span>UN RATO<br><em>DE FÚTBOL</em></span></div>
+ <div class="round"><b class="big" id="rt"></b><div class="ticks" id="ticks"></div></div>
+ <div class="ctl"><button data-ctl="rules">Reglas</button><button data-ctl="snd">Sonido: sí</button><button data-ctl="fs">Pantalla completa</button><button data-ctl="undo">Deshacer</button><button data-ctl="reset">Reiniciar</button></div>
+</header>
+<main><section class="pl" id="p0"></section><section id="center"></section><section class="pl" id="p1"></section></main>
+<div id="rules" class="ov" role="dialog" aria-modal="true" aria-labelledby="rt2"><div class="mod">
+<h2 id="rt2" class="big">¿Cómo se juega?</h2>
+<p>Sando y Laucha tienen 10 partidos cada uno, que se responden de a uno y de forma intercalada. En cada partido hay que adivinar el resultado y después los goleadores.</p>
+<table><tr><th style="text-align:left">Nivel</th><th>Resultado</th><th>Goleadores</th><th>Total</th></tr>
+<tr class="facil"><td>Fácil</td><td>1</td><td>1</td><td>2</td></tr>
+<tr class="medio"><td>Medio</td><td>2</td><td>2</td><td>4</td></tr>
+<tr class="dificil"><td>Difícil</td><td>3</td><td>3</td><td>6</td></tr>
+<tr class="imposible"><td>Imposible (uno por jugador)</td><td>7</td><td>7</td><td>14</td></tr></table>
+<ul><li>Acertar el <b>resultado exacto</b> suma los puntos del nivel.</li>
+<li>Decir <b>todos los goleadores</b> suma exactamente lo mismo que el resultado.</li>
+<li>Se puede escribir el <b>nombre completo o solo el apellido</b>. El orden de los goles no importa.</li>
+<li>Si un jugador hizo varios goles, se completan <b>todos juntos</b>.</li>
+<li>Cada partido permite <b>3 errores</b> con los goleadores. Máximo posible por jugador: 50 puntos.</li></ul>
+<div class="row"><button data-ctl="close">¡Empezar!</button></div></div></div>
+
+<script>
+/* ============ CONFIGURACIÓN ============
+   Fotos y escudos: se cargan solos desde estas carpetas, junto a este index.html, con el nombre en minúsculas,
+   sin tildes ni espacios (guiones en su lugar): fotos/sando.png, escudos/boca-juniors.png, escudos/newells.png ...
+   Acepta .png, .webp, .jpg o .svg. Si falta una imagen se ve un círculo con las iniciales. */
+const CONFIG={
+  jugadores:[{nombre:"Sando",color:"#75aadb"},{nombre:"Laucha",color:"#f6b40e"}],
+  erroresMax:3 /* errores permitidos al adivinar goleadores en cada partido */
+};
+/* [competencia, local, visitante, golesLocal, golesVisitante, "goleadores local", "goleadores visitante"]
+   Goleadores separados por coma. "x2" si hizo más de un gol, "(e.c.)" si fue gol en contra. */
+const MATCHES=[[
+["Copa de la Liga 2021 · Final","Colón","Racing Club",3,0,"Rodrigo Aliendro, Christian Bernardi, Alexis Castro",""],
+["Copa de la Liga · Clausura, fecha 16","Boca Juniors","Defensa y Justicia",1,0,"Enner Valencia",""],
+["Mundial 2026 · Fecha 1","Argentina","Argelia",3,0,"Lionel Messi x3",""],
+["Copa de la Liga 2023 · Fecha 7","Rosario Central","Newell's",1,0,"Ignacio Malcorra",""],
+["Copa Libertadores 2023 · Final","Boca Juniors","Fluminense",1,2,"Luis Advíncula","Germán Cano, John Kennedy"],
+["Liga Profesional 2022 · Fecha 2","Colón","Unión",2,2,"Facundo Farías, Ramón Ábila","Mauro Luna Diale, Jonathan Alvez"],
+["Copa Sudamericana 2019 · Cuartos de final","Colón","Zulia FC",4,0,"Wilson Morelo, Luis Rodríguez, Tomás Chancalay, Federico Lertora",""],
+["Copa Sudamericana 2021 · Final","Lanús","Defensa y Justicia",0,3,"","Adonis Frías, Braian Romero, Washington Camacho"],
+["Copa de la Liga 2026 · Apertura, fecha 10","Independiente","Unión",4,4,"Ignacio Pussetto, Gabriel Ávalos x2, Juan Fedorco","Cristian Tarragona, Brahian Cuello, Mateo Del Blanco, Maizon Rodríguez"],
+["Copa Argentina 2019 · 16avos de final","Colón","Sol de Mayo",4,0,"Santiago Pierotti, Mauro Da Luz, Nicolás Leguizamón, Tomás Chancalay",""]
+],[
+["Mundial de Clubes 2025 · Fecha 2","Bayern München","Boca Juniors",2,1,"Harry Kane, Michael Olise","Miguel Merentiel"],
+["Copa Libertadores 2018 · Final","River Plate","Boca Juniors",3,1,"Lucas Pratto, Juan Fernando Quintero, Gonzalo Martínez","Darío Benedetto"],
+["Mundial 2026 · Semifinal","Argentina","Croacia",3,0,"Lionel Messi, Julián Álvarez x2",""],
+["Copa Argentina 2023 · Final","Estudiantes LP","Defensa y Justicia",1,0,"Guido Carrillo",""],
+["Copa de la Liga 2023 · Desempate por el descenso","Gimnasia LP","Colón",1,0,"Nicolás Colazo",""],
+["Copa de la Liga 2024 · Cuartos de final","River Plate","Boca Juniors",2,3,"Miguel Borja, Paulo Díaz","Miguel Merentiel x2, Edinson Cavani"],
+["Copa Libertadores 2018 · Cuartos de final","River Plate","Independiente",3,1,"Ignacio Scocco, Juan Fernando Quintero, Rafael Santos Borré","Silvio Romero"],
+["Copa de la Liga 2022 · Cuartos de final","Racing Club","Aldosivi",5,0,"Emiliano Vecchio, Enzo Copetti, Leonardo Sigali, Rufino Lucero (e.c.), Jonathan Gómez",""],
+["Copa Argentina 2025 · 32avos de final","Boca Juniors","Argentino de Monte Maíz",5,0,"Exequiel Zeballos, Miguel Merentiel, Lucas Janson, Milton Giménez, Kevin Zenón",""],
+["Copa Intercontinental 1977 · Final","Boca Juniors","Borussia Mönchengladbach",3,0,"Darío Felman, Ernesto Mastrángelo, Carlos Salinas",""]
+]];
+/* ======================================= */
+const LV=["facil","facil","facil","medio","medio","medio","dificil","dificil","dificil","imposible"];
+const LI={facil:{n:"FÁCIL",p:1},medio:{n:"MEDIO",p:2},dificil:{n:"DIFÍCIL",p:3},imposible:{n:"PARTIDO IMPOSIBLE",p:7}};
+const slug=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/['’]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+const norm=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/\(.*?\)/g,"").replace(/[^a-z0-9 ]+/g," ").trim();
+const ents=s=>s.split(",").map(x=>x.trim()).filter(Boolean).map(x=>{const m=x.match(/^(.*?)\s+x(\d+)$/i);return{n:m?m[1]:x,c:m?+m[2]:1}});
+const P=CONFIG.jugadores.map((j,i)=>({...j,up:null,ms:MATCHES[i].map((a,k)=>({lvl:LV[k],comp:a[0],h:a[1],a:a[2],hg:a[3],ag:a[4],hs:ents(a[5]),as:ents(a[6])}))}));
+const slotsOf=m=>({h:m.hs.flatMap((e,i)=>Array(e.c).fill({id:"h"+i,n:e.n})),a:m.as.flatMap((e,i)=>Array(e.c).fill({id:"a"+i,n:e.n}))});
+const ne=m=>m.hs.length+m.as.length;
+function lev1(a,b){if(a==b)return true;if(Math.abs(a.length-b.length)>1)return false;let i=0;while(i<a.length&&a[i]==b[i])i++;if(a.length==b.length)return a.slice(i+1)==b.slice(i+1);return a.length>b.length?a.slice(i+1)==b.slice(i):b.slice(i+1)==a.slice(i)}
+function guess(m,g){const q=norm(g).split(" ").filter(Boolean);if(!q.length)return null;
+const all=[...m.hs.map((e,i)=>({id:"h"+i,n:e.n})),...m.as.map((e,i)=>({id:"a"+i,n:e.n}))];
+const hit=all.filter(e=>{const t=norm(e.n).split(" ");return q.every(w=>t.some(x=>x==w||(w.length>4&&lev1(x,w))))});
+return hit.find(e=>!S.found.includes(e.id))||hit[0]||null}
+function finish(q){q.r[q.k].s=S.found.length==ne(q.m);S.phase="next"}
+const up={},RM=matchMedia("(prefers-reduced-motion:reduce)").matches;
+let S,hist=[],shown=[0,0],snd=true,ac;
+const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fresh=()=>({t:0,phase:"guess",hg:"",ag:"",gt:"",msg:"",found:[],wrong:[],err:0,last:[],res:[[],[]]});
+const cur=()=>{const p=S.t%2,k=S.t>>1;return{p,k,m:P[p].ms[k],r:S.res[p]}};
+const pt=m=>LI[m.lvl].p;
+const total=i=>S.res[i].reduce((s,r,k)=>s+(r?(r.r?pt(P[i].ms[k]):0)+(r.s?pt(P[i].ms[k]):0):0),0);
+const count=(i,f)=>S.res[i].filter(r=>r&&r[f]).length;
+function save(){try{localStorage.setItem("urdf2",JSON.stringify({S,hist}))}catch(e){}}
+function load(){try{const d=JSON.parse(localStorage.getItem("urdf2"));if(d&&d.S){S=d.S;hist=d.hist||[];return}}catch(e){}S=fresh()}
+const snap=()=>{hist.push(JSON.stringify(S));if(hist.length>60)hist.shift()};
+function beep(seq){if(!snd)return;try{ac=ac||new AudioContext();let t=ac.currentTime;for(const[f,d]of seq){const o=ac.createOscillator(),g=ac.createGain();o.type="triangle";o.frequency.value=f;g.gain.setValueAtTime(.12,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g).connect(ac.destination);o.start(t);o.stop(t+d);t+=d*.8}}catch(e){}}
+const OK=[[523,.12],[659,.12],[784,.28]],NO=[[196,.3],[147,.45]],WIN=[[523,.15],[659,.15],[784,.15],[1046,.6]];
+function burst(x,y,n=28){if(RM)return;const cs=["#75aadb","#f6b40e","#fff","#2ed47a"];for(let i=0;i<n;i++){const e=document.createElement("i");e.className="cf";e.style.background=cs[i%4];document.body.appendChild(e);const a=Math.random()*6.28,d=80+Math.random()*200;e.animate([{transform:`translate(${x}px,${y}px)`,opacity:1},{transform:`translate(${x+Math.cos(a)*d}px,${y+Math.sin(a)*d+100}px) rotate(${Math.random()*720}deg)`,opacity:0}],{duration:1100+Math.random()*600,easing:"cubic-bezier(.1,.7,.4,1)"}).onfinish=()=>e.remove()}}
+function fx(p,n){if(!n||RM)return;const c=$(".stage").getBoundingClientRect(),t=$("#p"+p+" .score").getBoundingClientRect(),e=document.createElement("div");
+e.className="fly";e.textContent="+"+n;document.body.appendChild(e);const x0=c.left+c.width/2,y0=c.top+c.height/2;
+e.animate([{transform:`translate(${x0}px,${y0}px) scale(2)`,opacity:1},{transform:`translate(${t.left+t.width/2}px,${t.top+t.height/2}px) scale(.8)`,opacity:.1}],{duration:900,easing:"cubic-bezier(.5,0,.8,.4)"}).onfinish=()=>e.remove();burst(x0,y0)}
+function countUp(el,a,b){const t0=performance.now();(function f(n){const k=Math.min(1,(n-t0)/700);el.textContent=Math.round(a+(b-a)*k);if(k<1)requestAnimationFrame(f)})(t0)}
+const EXT=["png","webp","jpg","svg"];
+function nx(i){const k=+(i.dataset.k||0)+1;if(k<EXT.length){i.dataset.k=k;i.src=i.dataset.b+"."+EXT[k]}else i.remove()}
+const img=(b,alt,u)=>u?`<img src="${esc(u)}" alt="${esc(alt)}" onerror="this.remove()">`:`<img src="${b}.png" data-b="${b}" alt="${esc(alt)}" onerror="nx(this)">`;
+function crest(t){let h=0;for(const c of t)h=(h*31+c.charCodeAt(0))%360;
+const ini=t.split(/\s+/).map(w=>w[0]).join("").slice(0,3).toUpperCase();
+return `<label class="crest" title="Subir escudo"><input type="file" accept="image/*" data-team="${esc(t)}"><b style="background:hsl(${h} 45% 34%)">${esc(ini)}</b>${img("escudos/"+slug(t),"Escudo de "+t,up[t])}</label>`}
+function panel(i){const p=P[i];
+const trk=p.ms.map((m,k)=>{const r=S.res[i][k];let c="sg "+m.lvl,t=pt(m);if(r){const n=(r.r?1:0)+(r.s?1:0);c+=n==2?" hit":n==1?" part":" miss";t=n?(n==2?"✓✓":"✓"):"✗"}else if(S.t<20&&cur().p===i&&cur().k===k)c+=" cur";return `<div class="${c}" title="${LI[m.lvl].n}">${t}</div>`}).join("");
+return `<div class="tag">EN TURNO</div><label class="ph" title="Subir foto"><input type="file" accept="image/*" data-player="${i}"><b>${esc(p.nombre[0])}</b>${img("fotos/"+slug(p.nombre),"Foto de "+p.nombre,p.up)}</label>
+<div class="pname big">${esc(p.nombre)}</div><div class="score big">${shown[i]}</div><div class="lbl">puntos</div>
+<div class="st"><div><b>${count(i,"r")}/${S.res[i].length}</b>resultados</div><div><b>${count(i,"s")}/${S.res[i].filter(r=>r&&P[i].ms[S.res[i].indexOf(r)]).length}</b>goleadores</div></div><div class="trk">${trk}</div>`}
+function center(){
+if(S.t>=20){const a=total(0),b=total(1),w=a==b?-1:a>b?0:1,p=P[w<0?0:w];
+return `<div class="stage"><div class="end"><div class="lbl">Final del duelo</div>${w<0?"":`<div class="ph" style="--c:${p.color}"><b>${esc(p.nombre[0])}</b>${img("fotos/"+slug(p.nombre),"",p.up)}</div>`}<h2 class="big">${w<0?"¡EMPATE!":"GANÓ "+esc(p.nombre.toUpperCase())}</h2><div class="big" style="font-size:48px">${esc(P[0].nombre)} ${a} – ${b} ${esc(P[1].nombre)}</div>${w<0?'<p class="lbl">Definan con un partido extra.</p>':""}<div class="row"><button data-act="reset">Jugar de nuevo</button></div></div></div>`}
+const{p,k,m,r}=cur(),ph=S.phase,n=pt(m),dis=ph=="guess"?"":"disabled",ex=m.hg+m.ag>0,step=ph=="guess"?0:ph=="next"?2:1;
+const gl=(f,t)=>`<div class="gl"><button data-st="${f}:1" ${dis} aria-label="Sumar gol">+</button><input type="number" min="0" max="30" inputmode="numeric" data-g="${f}" value="${esc(S[f])}" ${dis} aria-label="Goles de ${esc(t)}"><button data-st="${f}:-1" ${dis} aria-label="Restar gol">−</button></div>`;
+let h=`<div class="stage ${m.lvl}"><div class="lvl big"><span>${LI[m.lvl].n}</span><small>TURNO DE ${esc(P[p].nombre.toUpperCase())} · PARTIDO ${k+1}/10 · ${n} ${n==1?"PUNTO":"PUNTOS"} EN JUEGO</small></div>
+<div class="steps"><span class="${step==0?"on":""}">1. Resultado</span><span class="${step==1?"on":""}">2. Goleadores</span><span class="${step==2?"on":""}">3. Puntos</span></div>
+<div class="body"><div class="comp">${esc(m.comp)}</div>
+<div class="board"><div class="side">${crest(m.h)}<div class="tname">${esc(m.h)}</div></div><div class="mid">${gl("hg",m.h)}<i>–</i>${gl("ag",m.a)}</div><div class="side">${crest(m.a)}<div class="tname">${esc(m.a)}</div></div></div>`;
+if(ph=="guess")h+=`<div class="msg">${S.msg}</div><div class="row"><button data-act="confirm">Confirmar resultado</button></div>`;
+else{h+=`<div class="real"><small>RESULTADO REAL</small><b>${m.hg} – ${m.ag}</b><br><span class="pill ${r[k].r?"ok":"no"}">${r[k].r?"Resultado acertado +"+n:"Resultado incorrecto"}</span></div>`;
+if(ex){const sl=slotsOf(m);h+=`<div class="gb">${["h","a"].map(sd=>`<div><h4>${esc(sd=="h"?m.h:m.a)}</h4>${sl[sd].map(e=>{const f=S.found.includes(e.id),mi=ph=="next"&&!f;return `<div class="slot ${f?"f":mi?"m":""} ${f&&S.last.includes(e.id)?"n":""}"><span>⚽</span><b>${f||mi?esc(e.n):"?"}</b></div>`}).join("")||'<div class="slot z">Sin goles</div>'}</div>`).join("")}</div>`}
+if(ph=="scorers")h+=`<div class="gin"><input id="gt" type="text" autocomplete="off" autocapitalize="words" placeholder="Escribí un goleador: nombre completo o apellido" value="${esc(S.gt)}"><button data-act="add">Agregar</button></div><div class="errs">Errores <span>${Array.from({length:CONFIG.erroresMax},(_,i)=>`<i class="${i<S.err?"x":""}"></i>`).join("")}</span>${S.wrong.map(w=>`<span class="chip">${esc(w)}</span>`).join("")}</div><div class="msg">${S.msg}</div><div class="row"><button class="gh" data-act="end">Terminar y revelar</button></div>`;
+if(ph=="next")h+=`<span class="pill ${!ex?"na":r[k].s?"ok":"no"}" style="margin-top:16px">${!ex?"Sin goles: no hay goleadores":r[k].s?"Goleadores acertados +"+n:"Goleadores incompletos"}</span><div class="row"><button data-act="next">${S.t==19?"Ver ganador":"Siguiente partido"}</button></div>`}
+return h+"</div></div>"}
+function render(){
+$("#p0").innerHTML=panel(0);$("#p1").innerHTML=panel(1);$("#center").innerHTML=center();
+for(let i=0;i<2;i++){$("#p"+i).style.setProperty("--c",P[i].color);$("#p"+i).classList.toggle("on",S.t<20&&cur().p==i);const b=total(i),el=$("#p"+i+" .score");if(shown[i]!==b){const a=shown[i];shown[i]=b;countUp(el,a,b)}}
+$("#rt").textContent=S.t>=20?"FIN DEL DUELO":"RONDA "+((S.t>>1)+1)+" DE 10";
+$("#ticks").innerHTML=Array.from({length:20},(_,i)=>`<i class="${i<S.t?"d":i==S.t?"c":""}"></i>`).join("");
+const gi=$("#gt");if(gi&&S.phase=="scorers"&&$("#rules").hidden)gi.focus();
+save()}
+document.addEventListener("click",e=>{
+const st=e.target.closest("[data-st]");
+if(st&&S.phase=="guess"){const[f,d]=st.dataset.st.split(":");S[f]=String(Math.max(0,Math.min(30,(+S[f]||0)+ +d)));S.msg="";return render()}
+const c=e.target.closest("[data-ctl]");
+if(c){const a=c.dataset.ctl;
+if(a=="rules")$("#rules").hidden=false;
+if(a=="close"){$("#rules").hidden=true;const g=$("#gt");if(g)g.focus()}
+if(a=="snd"){snd=!snd;c.textContent="Sonido: "+(snd?"sí":"no")}
+if(a=="fs")document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();
+if(a=="undo"&&hist.length){S=JSON.parse(hist.pop());render()}
+if(a=="reset"&&confirm("¿Reiniciar el juego y borrar los puntos?")){hist=[];S=fresh();shown=[0,0];render()}
+return}
+const b=e.target.closest("[data-act]");if(!b)return;const a=b.dataset.act;
+if(a=="reset"){hist=[];S=fresh();shown=[0,0];return render()}
+const q=S.t<20?cur():null;
+if(a=="confirm"){if(S.hg===""||S.ag===""){S.msg="Completá los goles de los dos equipos.";return render()}
+snap();const ok=+S.hg==q.m.hg&&+S.ag==q.m.ag;q.r[q.k]={r:ok,s:false};S.phase=q.m.hg+q.m.ag>0?"scorers":"next";render();if(ok){beep(OK);fx(q.p,pt(q.m))}else beep(NO);return}
+if(a=="add"){const g=S.gt.trim();if(g.length<3){S.msg="Escribí al menos 3 letras.";return render()}
+snap();const hit=guess(q.m,g);S.gt="";S.last=[];S.msg="";
+if(!hit){S.wrong.push(g);S.err++;beep(NO)}else if(S.found.includes(hit.id))S.msg="Ese goleador ya está en el marcador.";else{S.found.push(hit.id);S.last=[hit.id];beep(OK)}
+if(S.found.length==ne(q.m)||S.err>=CONFIG.erroresMax)finish(q);
+render();if(S.phase=="next"&&q.r[q.k].s)fx(q.p,pt(q.m));return}
+if(a=="end"){snap();finish(q);render();return}
+snap();
+if(a=="next"){S.t++;S.phase="guess";S.hg=S.ag=S.gt=S.msg="";S.found=[];S.wrong=[];S.err=0;S.last=[];render();if(S.t>=20){beep(WIN);burst(innerWidth/2,innerHeight/3,90)}return}
+render()});
+document.addEventListener("input",e=>{if(e.target.dataset.g){S[e.target.dataset.g]=e.target.value;S.msg=""}if(e.target.id=="gt")S.gt=e.target.value;save()});
+document.addEventListener("change",e=>{const f=e.target.files&&e.target.files[0];if(!f)return;const rd=new FileReader();
+rd.onload=()=>{if(e.target.dataset.team)up[e.target.dataset.team]=rd.result;else P[+e.target.dataset.player].up=rd.result;render()};rd.readAsDataURL(f)});
+document.addEventListener("keydown",e=>{const R=$("#rules");if(!R.hidden){if(e.key=="Enter"||e.key=="Escape"){R.hidden=true;e.preventDefault();const g=$("#gt");if(g)g.focus()}return}
+if(e.key!="Enter"||e.target.tagName=="BUTTON")return;
+if(e.target.id=="gt"){e.preventDefault();$('[data-act="add"]').click();return}
+const b=$('[data-act="confirm"]')||$('[data-act="next"]');if(b)b.click()});
+load();render();$("#rules button").focus();
+</script>
+</body>
+</html>
