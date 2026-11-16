@@ -62,7 +62,9 @@ main{position:relative;display:grid;grid-template-columns:minmax(260px,1fr) minm
 .steps span{flex:1;font:600 13px Inter;color:var(--mute);border-top:3px solid var(--line);padding-top:6px}
 .steps .on{color:var(--ink);border-color:var(--sol)}
 .body{padding:12px 20px 24px;text-align:center}
-.comp{color:var(--mute);margin-bottom:14px}
+.comp{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.comp b{font:400 clamp(30px,4vw,44px)/1 "Bebas Neue";letter-spacing:.03em;color:var(--ink);font-weight:400}
+.comp span{font:800 15px Inter;letter-spacing:.04em;text-transform:uppercase;background:var(--sol);color:#1d1400;padding:6px 14px;border-radius:99px}
 .board{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;background:#0005;border-radius:16px;padding:22px 10px}
 .side{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0}
 .crest{position:relative;display:grid;place-items:center;width:clamp(84px,13vw,140px);aspect-ratio:1}
@@ -249,7 +251,7 @@ const{p,k,m,r}=cur(),ph=S.phase,n=pt(m),dis=ph=="guess"?"":"disabled",ex=m.hg+m.
 const gl=(f,t)=>`<div class="gl"><button data-st="${f}:1" ${dis} aria-label="Sumar gol">+</button><input type="number" min="0" max="30" inputmode="numeric" data-g="${f}" value="${esc(S[f])}" ${dis} aria-label="Goles de ${esc(t)}"><button data-st="${f}:-1" ${dis} aria-label="Restar gol">−</button></div>`;
 let h=`<div class="stage ${m.lvl}"><div class="lvl big"><span>${LI[m.lvl].n}</span><small>TURNO DE ${esc(P[p].nombre.toUpperCase())} · PARTIDO ${k+1}/10 · ${n} ${n==1?"PUNTO":"PUNTOS"} EN JUEGO</small></div>
 <div class="steps"><span class="${step==0?"on":""}">1. Resultado</span><span class="${step==1?"on":""}">2. Goleadores</span><span class="${step==2?"on":""}">3. Puntos</span></div>
-<div class="body"><div class="comp">${esc(m.comp)}</div>
+<div class="body"><div class="comp">${(c=>`<b>${esc(c[0])}</b>${c[1]?`<span>${esc(c[1])}</span>`:""}`)(m.comp.split(" · "))}</div>
 <div class="board"><div class="side">${crest(m.h)}<div class="tname">${esc(m.h)}</div></div><div class="mid">${gl("hg",m.h)}<i>–</i>${gl("ag",m.a)}</div><div class="side">${crest(m.a)}<div class="tname">${esc(m.a)}</div></div></div>`;
 if(ph=="guess")h+=`<div class="msg">${S.msg}</div><div class="row"><button data-act="confirm">Confirmar resultado</button></div>`;
 else{h+=`<div class="real"><small>RESULTADO REAL</small><b>${m.hg} – ${m.ag}</b><br><span class="pill ${r[k].r?"ok":"no"}">${r[k].r?"Resultado acertado +"+n:"Resultado incorrecto"}</span></div>`;
